@@ -35,44 +35,55 @@ git clone https://github.com/DjangoPeng/deepseek-quickstart.git
 *如果对数据保护和隐私安全有要求，需要私有化部署请搭建以下 GPU 开发环境*
 
 
-根据你的操作系统和架构，找到对应的 [CUDA 12.04 版本](https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=22.04&target_type=runfile_local)：
-
-下载并安装 CUDA 12.04 Toolkit（包含GPU驱动）：
+（若使用华为云 GPU 服务器，无需安装，Ubuntu 22.04 操作系统自带）下载并安装 CUDA 12.4 Toolkit 和 GPU驱动：
 
 ```shell
 wget https://developer.download.nvidia.com/compute/cuda/12.4.0/local_installers/cuda_12.4.0_550.54.14_linux.run
 sudo sh cuda_12.4.0_550.54.14_linux.run
 ```
 
-**注意使用`runfile`方式，可以连同版本匹配的 GPU 驱动一起安装好。**
+成功安装输出日志如下：
 
+```shell
+===========
+= Summary =
+===========
 
-![CUDA Toolkit](docs/cuda_installation.png)
+Driver:   Installed
+Toolkit:  Installed in /usr/local/cuda-12.4/
+
+Please make sure that
+ -   PATH includes /usr/local/cuda-12.4/bin
+ -   LD_LIBRARY_PATH includes /usr/local/cuda-12.4/lib64, or, add /usr/local/cuda-12.4/lib64 to /etc/ld.so.conf and run ldconfig as root
+
+To uninstall the CUDA Toolkit, run cuda-uninstaller in /usr/local/cuda-12.4/bin
+To uninstall the NVIDIA Driver, run nvidia-uninstall
+Logfile is /var/log/cuda-installer.log
+```
 
 安装完成后，使用 `nvidia-smi` 指令查看版本：
 
 ```shell
-nvidia-smi          
-Mon Dec 18 12:10:47 2023       
-+---------------------------------------------------------------------------------------+
-| NVIDIA-SMI 535.129.03             Driver Version: 535.129.03   CUDA Version: 12.2     |
-|-----------------------------------------+----------------------+----------------------+
-| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
-| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
-|                                         |                      |               MIG M. |
-|=========================================+======================+======================|
-|   0  Tesla T4                       Off | 00000000:00:0D.0 Off |                    0 |
-| N/A   44C    P0              26W /  70W |      2MiB / 15360MiB |      6%      Default |
-|                                         |                      |                  N/A |
-+-----------------------------------------+----------------------+----------------------+
+Mon Jun  9 12:05:27 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 550.54.14              Driver Version: 550.54.14      CUDA Version: 12.4     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  Tesla T4                       Off |   00000000:00:0D.0 Off |                  Off |
+| N/A   57C    P0             28W /   70W |       0MiB /  16384MiB |      7%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
                                                                                          
-+---------------------------------------------------------------------------------------+
-| Processes:                                                                            |
-|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
-|        ID   ID                                                             Usage      |
-|=======================================================================================|
-|  No running processes found                                                           |
-+---------------------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
 ```
 
 ---
